@@ -118,6 +118,25 @@ class ReactNativeUA {
         }
     }
 
+    static get_channel_id(callback) {
+        return new Promise((resolve, reject) => {
+                bridge.getChannelId(channelId => {
+                callback && callback(null, channelId);
+            resolve(channelId);
+            })
+        })
+    }
+
+    static get_device_token(callback) {
+        return new Promise((resolve, reject) => {
+                bridge.getDeviceToken(deviceToken => {
+                callback && callback(null, deviceToken);
+            resolve(deviceToken);
+            })
+        })
+    }
+
+
 }
 
 export default ReactNativeUA

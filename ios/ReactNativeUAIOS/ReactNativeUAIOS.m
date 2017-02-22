@@ -158,6 +158,22 @@ RCT_EXPORT_METHOD(disableActionUrl) {
     NSLog(@"Desabilitou o comportamento DEFAULT da action URL -> %@", isActionUrl ? @"YES": @"NO");
 }
 
+RCT_EXPORT_METHOD(getChannelId:(RCTResponseSenderBlock)callbackChannel) {
+    NSString *channelID = @"";
+    if ([UAirship push].channelID) {
+        channelID = [UAirship push].channelID;
+    }
+    callbackChannel(@[ channelID ]);
+}
+
+RCT_EXPORT_METHOD(getDeviceToken:(RCTResponseSenderBlock)callbackToken) {
+    NSString *deviceToken = @"";
+    if ([UAirship push].deviceToken) {
+        deviceToken = [UAirship push].deviceToken;
+    }
+    callbackToken(@[ deviceToken ]);
+}
+
 @end
 
 
