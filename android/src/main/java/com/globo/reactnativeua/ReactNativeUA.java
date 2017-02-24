@@ -21,6 +21,7 @@ import com.urbanairship.actions.ActionRunRequest;
 import com.urbanairship.actions.ActionValue;
 import com.urbanairship.push.notifications.DefaultNotificationFactory;
 import com.urbanairship.push.notifications.NotificationFactory;
+import com.facebook.react.bridge.Callback;
 
 
 public class ReactNativeUA extends ReactContextBaseJavaModule {
@@ -95,6 +96,12 @@ public class ReactNativeUA extends ReactContextBaseJavaModule {
     public void disableActionUrl() {
         ReactNativeUAReceiverHelper.setup(getReactApplicationContext()).setActionUrl(false);
         Log.d("ActionUrl", "Disable default action url behaviour -> False");
+    }
+
+    @ReactMethod
+    public void getChannelId(Callback callback) {
+      String channelId = UAirship.shared().getPushManager().getChannelId();
+      callback.invoke(channelId);
     }
 
     @ReactMethod
