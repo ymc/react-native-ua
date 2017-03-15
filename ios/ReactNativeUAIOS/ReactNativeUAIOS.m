@@ -174,6 +174,19 @@ RCT_EXPORT_METHOD(getDeviceToken:(RCTResponseSenderBlock)callbackToken) {
     callbackToken(@[ deviceToken ]);
 }
 
+RCT_EXPORT_METHOD(getNotification:(RCTResponseSenderBlock)callbackNotification) {
+    
+    NSDictionary *notification = @[];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"push_notification_opened_from_background"]) {
+        notification = [defaults objectForKey:@"push_notification_opened_from_background"];
+        [defaults removeObjectForKey:@"push_notification_opened_from_background"];
+    }
+    
+    callbackNotification(@[ notification ]);
+}
+
 @end
 
 

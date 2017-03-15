@@ -136,7 +136,13 @@ class ReactNativeUA {
         })
     }
 
-
+    static get_notification(callback) {
+        return new Promise((resolve, reject) => {
+            bridge.getNotification(notification => {
+            callback && callback(null, notification);
+        resolve(notification);
+        })
+    })
 }
 
 export default ReactNativeUA
