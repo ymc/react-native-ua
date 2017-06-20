@@ -22,6 +22,9 @@ import com.urbanairship.actions.ActionValue;
 import com.urbanairship.push.notifications.DefaultNotificationFactory;
 import com.urbanairship.push.notifications.NotificationFactory;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.WritableNativeArray;
+import com.facebook.react.bridge.WritableArray;
+import java.util.Set;
 
 
 public class ReactNativeUA extends ReactContextBaseJavaModule {
@@ -102,6 +105,17 @@ public class ReactNativeUA extends ReactContextBaseJavaModule {
     public void getChannelId(Callback callback) {
       String channelId = UAirship.shared().getPushManager().getChannelId();
       callback.invoke(channelId);
+    }
+
+    @ReactMethod
+    public void getTags(Callback callback) {
+      Set<String> tags = UAirship.shared().getPushManager().getTags();
+      WritableArray array = new WritableNativeArray();
+      for (String tag: tags)
+      {
+        array.pushString(tag);
+      }
+      callback.invoke(array);
     }
 
     @ReactMethod

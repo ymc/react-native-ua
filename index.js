@@ -127,6 +127,15 @@ class ReactNativeUA {
         })
     }
 
+    static get_tags(callback) {
+        return new Promise((resolve, reject) => {
+                bridge.getTags(tags => {
+                callback && callback(null, tags);
+            resolve(tags);
+            })
+        })
+    }
+
     static get_device_token(callback) {
         return new Promise((resolve, reject) => {
                 bridge.getDeviceToken(deviceToken => {
